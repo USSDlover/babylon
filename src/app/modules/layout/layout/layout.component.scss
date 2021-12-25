@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  grid-template:
+    'main' auto
+    'nav' max-content / auto;
+}
+
+.main {
+  grid-area: main;
+}
+
+.nav {
+  grid-area: nav;
+}
