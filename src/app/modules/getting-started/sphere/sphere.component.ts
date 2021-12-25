@@ -1,13 +1,13 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Engine, Scene, FreeCamera, MeshBuilder, Vector3, HemisphericLight} from '@babylonjs/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Engine, FreeCamera, HemisphericLight, MeshBuilder, Scene, Vector3} from '@babylonjs/core';
 
 @Component({
-  selector: 'app-cube',
-  templateUrl: './cube.component.html',
-  styleUrls: ['./cube.component.scss']
+  selector: 'app-sphere',
+  templateUrl: './sphere.component.html',
+  styleUrls: ['./sphere.component.scss']
 })
-export class CubeComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('cube') cubeCanvas: ElementRef | undefined;
+export class SphereComponent implements OnInit, AfterViewInit {
+  @ViewChild('sphere') cubeCanvas: ElementRef | undefined;
   @HostListener('window:resize') onWindowResize = () => {
     this.renderTheScene();
   }
@@ -43,13 +43,13 @@ export class CubeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.scene) {
-      const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), this.scene);
+      const camera = new FreeCamera('camera2', new Vector3(0, 5, -10), this.scene);
       camera.setTarget(Vector3.Zero());
       camera.attachControl(this.babylonCanvas, false);
-      const light = new HemisphericLight('light1', new Vector3(0, 1, 0), this.scene);
-      const sphere = MeshBuilder.CreateBox('box1', {}, this.scene);
+      const light = new HemisphericLight('light2', new Vector3(0, 1, 0), this.scene);
+      const sphere = MeshBuilder.CreateSphere('sphere1', {}, this.scene);
       sphere.position.y = 1;
-      const ground = MeshBuilder.CreateGround('ground1', {}, this.scene);
+      const ground = MeshBuilder.CreateGround('ground2', {}, this.scene);
     }
 
     this.renderTheScene();
@@ -62,8 +62,5 @@ export class CubeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.scene.render();
       })
     }
-  }
-
-  ngOnDestroy() {
   }
 }
