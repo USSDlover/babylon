@@ -1,8 +1,9 @@
 :host {
   display: grid;
-  grid-template:
-    'main' auto
-    'nav' max-content / auto;
+  height: 100%;
+  grid-template-rows: auto minmax(10%, 5.6rem);
+  grid-template-columns: 100%;
+  grid-template-areas: 'main' 'nav';
 }
 
 .main {
