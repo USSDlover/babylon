@@ -20,7 +20,8 @@ const AngularMaterial = [
     ...AngularMaterial
   ],
   exports: [
-    NavigationComponent
+    NavigationComponent,
+    LayoutComponent
   ]
 })
 export class LayoutModule { }
