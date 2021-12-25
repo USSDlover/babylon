@@ -1,6 +1,11 @@
 <nav>
-  <button mat-flat-button color="primary" [matMenuTriggerFor]="started">Started</button>
+  <button mat-flat-button color="primary" [matMenuTriggerFor]="deeper">Diving Deeper</button>
+  <button mat-flat-button color="primary" [matMenuTriggerFor]="started">Getting Started</button>
 </nav>
+
+<mat-menu #deeper="matMenu">
+  <button mat-menu-item routerLink="diving/animation">Animation</button>
+</mat-menu>
 
 <mat-menu #started="matMenu">
   <button mat-menu-item routerLink="started/cube">Cube</button>

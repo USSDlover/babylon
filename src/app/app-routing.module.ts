@@ -8,6 +8,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/getting-started/getting-started.module')
         .then(m => m.GettingStartedModule)
+  },
+  {
+    path: 'diving',
+    loadChildren: () =>
+      import('./modules/diving-deeper/diving-deeper.module')
+        .then(m => m.DivingDeeperModule)
   }
 ];
 
