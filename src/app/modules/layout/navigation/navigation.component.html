@@ -1,1 +1,7 @@
-<p>navigation works!</p>
+<nav>
+  <button mat-button [matMenuTriggerFor]="started">Started</button>
+</nav>
+
+<mat-menu #started="matMenu">
+  <button mat-menu-item>Cube</button>
+</mat-menu>
