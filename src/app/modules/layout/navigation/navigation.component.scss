@@ -4,4 +4,9 @@ nav {
 
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  background-color: rgb(63, 81, 181, .43);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
 }
