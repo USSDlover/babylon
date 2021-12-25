@@ -1,1 +1,8 @@
 <canvas #animation></canvas>
+<div class="menu">
+  <button mat-raised-button [matMenuTriggerFor]="animations">Animation</button>
+
+  <mat-menu #animations="matMenu">
+    <button mat-menu-item (click)="animateTheCube()">Simple Slide</button>
+  </mat-menu>
+</div>
