@@ -1,6 +1,16 @@
 <canvas #animation></canvas>
 <div class="menu">
   <button mat-raised-button [matMenuTriggerFor]="animations">Animation</button>
+  <ng-container *ngIf="animatable">
+    <button mat-raised-button [matMenuTriggerFor]="animControl">Animation Controls</button>
+  </ng-container>
+
+  <mat-menu #animControl="matMenu">
+    <button mat-menu-item (click)="onAnimateControl('pause')">Pause</button>
+    <button mat-menu-item (click)="onAnimateControl('restart')">Restart</button>
+    <button mat-menu-item (click)="onAnimateControl('stop')">Stop</button>
+    <button mat-menu-item (click)="onAnimateControl('reset')">Reset</button>
+  </mat-menu>
 
   <mat-menu #animations="matMenu">
     <button mat-menu-item (click)="animateTheCube()">Simple Slide</button>

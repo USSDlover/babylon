@@ -10,9 +10,16 @@ canvas {
 }
 
 .menu {
+  height: 4rem;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 4rem;
+
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+
+  padding-inline: .5rem;
 }

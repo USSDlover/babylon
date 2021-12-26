@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Animation, Engine, FreeCamera, HemisphericLight, Mesh, MeshBuilder, Scene, Vector3} from '@babylonjs/core';
+import {Animatable, Engine, FreeCamera, HemisphericLight, Mesh, MeshBuilder, Scene, Vector3} from '@babylonjs/core';
+import {Animations} from '../animations';
 
 @Component({
   selector: 'app-animation',
@@ -16,8 +17,8 @@ export class AnimationComponent implements OnInit, AfterViewInit, OnDestroy {
   babylonEngine: Engine | undefined;
 
   scene: Scene | undefined;
-
   box: Mesh | undefined;
+  animatable: Animatable | undefined;
 
   constructor() { }
 
@@ -66,39 +67,39 @@ export class AnimationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   animateTheCube(): void {
+    const startFrame = 0;
+    const endFrame = 10;
     const frameRate = 10;
 
-    const xSlide = new Animation(
-      'xSlide',
-      'position.x',
-      frameRate,
-      Animation.ANIMATIONTYPE_FLOAT,
-      Animation.ANIMATIONLOOPMODE_CYCLE
-      );
-
-    const keyFrames = [];
-
-    keyFrames.push({
-      frame: 0,
-      value: 2,
-    });
-
-    keyFrames.push({
-      frame: frameRate,
-      value: -2,
-    });
-
-    keyFrames.push({
-      frame: 2 * frameRate,
-      value: 2,
-    });
-
-    xSlide.setKeys(keyFrames);
+    const xSlide = Animations.getXSlide(frameRate, startFrame, endFrame);
+    const ySlide = Animations.getYSlide(frameRate, startFrame, endFrame);
 
     if (this.box) {
       this.box.animations.push(xSlide);
+      this.box.animations.push(ySlide);
       if (this.scene) {
-        this.scene.beginAnimation(this.box, 0, 2 * frameRate, true);
+        this.animatable = this.scene.beginDirectAnimation(this.box, [xSlide, ySlide], startFrame, endFrame, true);
+      }
+    }
+  }
+
+  onAnimateControl(control: 'pause' | 'restart' | 'stop' | 'reset') {
+    if (this.animatable) {
+      switch (control) {
+        case 'pause':
+          this.animatable.pause();
+          break;
+        case 'restart':
+          this.animatable.restart();
+          break;
+        case 'stop':
+          this.animatable.stop();
+          break;
+        case 'reset':
+          this.animatable.reset();
+          break;
+        default:
+          break;
       }
     }
   }
